@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotBoredApp">
         <activity
+            android:name=".RandomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SuggestionActivity"
             android:exported="false" />
         <activity
