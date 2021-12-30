@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotBoredApp">
         <activity
+            android:name=".SuggestionActivity"
+            android:exported="false" />
+        <activity
             android:name=".TermsActivity"
             android:exported="false" />
         <activity
