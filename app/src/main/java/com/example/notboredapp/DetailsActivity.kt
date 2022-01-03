@@ -22,10 +22,10 @@ class DetailsActivity : AppCompatActivity() {
         val extra = intent.extras
         setContentView(binding.root)
 
-        //val participants = extra?.getInt(participants)
 
+        val participants = extra?.getString("participants")?.toInt()
         val type : String = extra?.getString("suggestion")!!
-        val participants = 1
+
 
         if (participants != 0){
             searchDetailsWithPartipants("?participants=$participants&type=$type")
