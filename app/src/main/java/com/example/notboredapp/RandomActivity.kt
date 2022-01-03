@@ -21,9 +21,10 @@ class RandomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater)
-        val extra = intent.extras
-        setContentView(binding.root)
 
+        setContentView(binding.root)
+        
+        val extra = intent.extras
         val participants = extra?.getInt("participants")
 
 
