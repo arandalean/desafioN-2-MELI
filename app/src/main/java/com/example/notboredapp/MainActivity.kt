@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnStart.setOnClickListener { start() }
+        binding.tvTerms.setOnClickListener { terms() }
+    }
+
+    private fun terms() {
+        val intent = Intent(this, TermsActivity::class.java)
+        startActivity(intent)
     }
 
     private fun start() {
