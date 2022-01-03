@@ -25,7 +25,7 @@ class DetailsActivity : AppCompatActivity() {
         //val participants = extra?.getInt(participants)
 
         val type : String = extra?.getString("suggestion")!!
-        val participants = 2
+        val participants = 1
 
         if (participants != 0){
             searchDetailsWithPartipants("?participants=$participants&type=$type")

@@ -6,13 +6,13 @@ import retrofit2.http.Query
 import retrofit2.http.Url
 
 interface APIService {
-    @GET ("http://www.boredapi.com/api/activity/")
+    @GET
     suspend fun getSuggestionByType(@Url url:String) :Response<SuggestResponse>
-    @GET ("http://www.boredapi.com/api/activity/")
+    @GET
     suspend fun getSuggestionByTypeWithPart(@Url url: String):Response<SuggestResponse>
-    @GET ("http://www.boredapi.com/api/activity/")
+    @GET
     suspend fun getSuggestionRandom():Response<SuggestResponse>
-    @GET ("http://www.boredapi.com/api/activity/")
+    @GET
     suspend fun getSuggestionRandomWithPart(@Url url: String):Response<SuggestResponse>
 
 

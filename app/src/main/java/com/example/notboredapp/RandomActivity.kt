@@ -15,10 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RandomActivity : AppCompatActivity() {
 
-   // var type : String? = ""
-   // var participants : Int? = 0
-   // var price : Float? = 0f
-   // var description : String? = ""
 
     private lateinit var binding: ActivityRandomBinding
 
@@ -30,12 +26,12 @@ class RandomActivity : AppCompatActivity() {
 
         //val participants = extra?.getInt(participants)
 
-        val participants = 2 //Borrar
+        val participants = 1 //Borrar
 
         if (participants !=0){
-            searchRandomWithParticipants(participants)
+            searchRandomWithParticipants("?participants=$participants")
             binding.BTNTryAnotherR.setOnClickListener(){
-                searchRandomWithParticipants(participants)
+                searchRandomWithParticipants("?participants=$participants")
             }
         } else{
             searchRandom()
@@ -58,30 +54,31 @@ class RandomActivity : AppCompatActivity() {
 
 
 
-    private fun searchRandomWithParticipants(participants : Int){
+    private fun searchRandomWithParticipants(url:String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIService::class.java).getSuggestionRandomWithPart(participants)
+            val call = getRetrofit().create(APIService::class.java).getSuggestionRandomWithPart(url)
             val suggestion : SuggestResponse? = call.body()
             runOnUiThread{
                 if (call.isSuccessful){
-                    binding.TVTypeR.text = suggestion?.type
-                    binding.TVParticipantResultR.text = (suggestion?.participants ?: 0).toString()
-                    val priceResult = suggestion?.price
-                    if (priceResult != null) {
-                        when {
-                            priceResult==0f -> binding.TVPriceResultR.text = "Free"
-                            (priceResult>0f && priceResult <= 0.3f) ->binding.TVPriceResultR.text = "Low"
-                            (priceResult>0.3f && priceResult <= 0.6f) ->binding.TVPriceResultR.text = "Medium"
-                            priceResult>0.6f -> "High".also { binding.TVPriceResultR.text = it }
 
+                        binding.TVTypeR.text = suggestion?.type
+                        binding.TVParticipantResultR.text =
+                            (suggestion?.participants ?: 0).toString()
+                        val priceResult = suggestion?.price
+                        if (priceResult != null) {
+                            when {
+                                priceResult == 0f -> binding.TVPriceResultR.text = "Free"
+                                (priceResult > 0f && priceResult <= 0.3f) -> binding.TVPriceResultR.text =
+                                    "Low"
+                                (priceResult > 0.3f && priceResult <= 0.6f) -> binding.TVPriceResultR.text =
+                                    "Medium"
+                                priceResult > 0.6f -> "High".also {
+                                    binding.TVPriceResultR.text = it
+                                }
+
+                            }
                         }
-                    }
-                    binding.TVSuggestDescriptionR.text = suggestion?.activity
-<<<<<<< HEAD
-                    // Llamar a funcion con Random Activity
-                    //showRandom(type, participants!!,price, description)
-=======
->>>>>>> 9e9b98a017c4af97238bf54fcc5fd4e1b7391abe
+                        binding.TVSuggestDescriptionR.text = suggestion?.activity
 
                 } else {
                     showError()
