@@ -1,5 +1,6 @@
 package com.example.notboredapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.notboredapp.databinding.ActivitySuggestionBinding
@@ -17,6 +18,19 @@ class SuggestionActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initiateRecyclerView()
+        val extra =intent.extras
+        val participants=extra?.getString("participants")
+
+        binding.btnRandom.setOnClickListener(){
+
+            val intent = Intent(this,RandomActivity::class.java)
+
+            intent.putExtra("participants",participants)
+            startActivity(intent)
+            finish()
+
+
+        }
 
     }
 

@@ -2,18 +2,10 @@ package com.example.notboredapp.recyclerView
 
 import android.content.Context
 import android.content.Intent
-<<<<<<< HEAD
-=======
-
->>>>>>> 9e9b98a017c4af97238bf54fcc5fd4e1b7391abe
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notboredapp.DetailsActivity
-<<<<<<< HEAD
-=======
-import com.example.notboredapp.SuggestionActivity
 
->>>>>>> 9e9b98a017c4af97238bf54fcc5fd4e1b7391abe
 import com.example.notboredapp.databinding.SuggestionItemBinding
 
 class SuggestViewHolder(view: View) : RecyclerView.ViewHolder(view) {

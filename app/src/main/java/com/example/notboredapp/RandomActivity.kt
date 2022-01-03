@@ -21,12 +21,11 @@ class RandomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = inflate(layoutInflater)
-        //val extra = intent.extras
+        val extra = intent.extras
         setContentView(binding.root)
 
-        //val participants = extra?.getInt(participants)
+        val participants = extra?.getInt("participants")
 
-        val participants = 1 //Borrar
 
         if (participants !=0){
             searchRandomWithParticipants("?participants=$participants")
