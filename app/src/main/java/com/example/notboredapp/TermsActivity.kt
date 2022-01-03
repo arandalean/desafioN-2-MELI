@@ -13,5 +13,9 @@ class TermsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTermsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.BTCloseTerms.setOnClickListener(){
+            finish()
+        }
     }
 }
