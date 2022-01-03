@@ -24,7 +24,7 @@ class DetailsActivity : AppCompatActivity() {
 
 
         val participants = extra?.getString("participants")?.toInt()
-        val type : String = extra?.getString("suggestion")!!
+        val type = extra?.getString("suggestion")
 
 
         if (participants != 0){
