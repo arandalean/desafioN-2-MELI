@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun start() {
-        val participants = binding.etParticipants.text.toString()
+        var participants = binding.etParticipants.text.toString()
+        if (participants.isNullOrBlank()) {
+            participants = "0"
+        }
         val intent = Intent(this, SuggestionActivity::class.java)
         intent.putExtra("participants", participants)
         startActivity(intent)

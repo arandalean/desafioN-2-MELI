@@ -11,7 +11,7 @@ interface APIService {
     @GET
     suspend fun getSuggestionByTypeWithPart(@Url url: String):Response<SuggestResponse>
     @GET
-    suspend fun getSuggestionRandom():Response<SuggestResponse>
+    suspend fun getSuggestionRandom(@Url url: String):Response<SuggestResponse>
     @GET
     suspend fun getSuggestionRandomWithPart(@Url url: String):Response<SuggestResponse>
 

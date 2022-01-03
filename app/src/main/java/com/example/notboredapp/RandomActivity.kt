@@ -25,7 +25,7 @@ class RandomActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val extra = intent.extras
-        val participants = extra?.getString("participants")?.toInt()
+        var participants = extra?.getString("participants")?.toInt()
 
 
         if (participants !=0){
@@ -34,9 +34,9 @@ class RandomActivity : AppCompatActivity() {
                 searchRandomWithParticipants("?participants=$participants")
             }
         } else{
-            searchRandom()
+            searchRandom("")
             binding.BTNTryAnotherR.setOnClickListener(){
-                searchRandom()
+                searchRandom("")
             }
         }
 
@@ -89,14 +89,14 @@ class RandomActivity : AppCompatActivity() {
         }
     }
 
-    private fun searchRandom(){
+    private fun searchRandom(url: String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIService::class.java).getSuggestionRandom()
+            val call = getRetrofit().create(APIService::class.java).getSuggestionRandom(url)
             val suggestion : SuggestResponse? = call.body()
             runOnUiThread{
                 if (call.isSuccessful){
                     binding.TVTypeR.text = suggestion?.type
-                    binding.TVParticipantResultR.text = (suggestion?.participants ?: 0).toString()
+                    binding.TVParticipantResultR.text = suggestion?.participants.toString()
                     val priceResult = suggestion?.price
                     if (priceResult != null) {
                         when {
