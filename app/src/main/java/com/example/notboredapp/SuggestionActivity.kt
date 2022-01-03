@@ -27,9 +27,6 @@ class SuggestionActivity : AppCompatActivity() {
 
             intent.putExtra("participants",participants)
             startActivity(intent)
-            finish()
-
-
         }
 
     }
