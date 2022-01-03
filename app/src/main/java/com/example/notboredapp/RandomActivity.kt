@@ -77,8 +77,11 @@ class RandomActivity : AppCompatActivity() {
                         }
                     }
                     binding.TVSuggestDescriptionR.text = suggestion?.activity
+<<<<<<< HEAD
                     // Llamar a funcion con Random Activity
                     //showRandom(type, participants!!,price, description)
+=======
+>>>>>>> 9e9b98a017c4af97238bf54fcc5fd4e1b7391abe
 
                 } else {
                     showError()
