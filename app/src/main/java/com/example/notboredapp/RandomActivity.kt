@@ -23,9 +23,9 @@ class RandomActivity : AppCompatActivity() {
         binding = inflate(layoutInflater)
 
         setContentView(binding.root)
-        
+
         val extra = intent.extras
-        val participants = extra?.getInt("participants")
+        val participants = extra?.getString("participants")?.toInt()
 
 
         if (participants !=0){

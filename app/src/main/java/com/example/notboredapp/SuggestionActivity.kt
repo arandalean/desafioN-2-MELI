@@ -19,7 +19,7 @@ class SuggestionActivity : AppCompatActivity() {
 
         initiateRecyclerView()
         val extra =intent.extras
-        val participants=extra?.getInt("participants")
+        val participants=extra?.getString("participants")
 
         binding.btnRandom.setOnClickListener(){
 
