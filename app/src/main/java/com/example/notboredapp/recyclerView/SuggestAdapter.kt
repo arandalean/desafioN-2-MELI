@@ -1,11 +1,12 @@
 package com.example.notboredapp.recyclerView
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notboredapp.R
 
-class SuggestAdapter(private var suggestionsList : List<String>) : RecyclerView.Adapter<SuggestViewHolder>() {
+class SuggestAdapter(private var suggestionsList : List<String>, private val context : Context) : RecyclerView.Adapter<SuggestViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -15,7 +16,7 @@ class SuggestAdapter(private var suggestionsList : List<String>) : RecyclerView.
     override fun onBindViewHolder(holder: SuggestViewHolder, position: Int) {
 
         val suggestionAtPosition = suggestionsList[position]
-        holder.bind(suggestionAtPosition)
+        holder.bind(suggestionAtPosition, context)
     }
 
     override fun getItemCount(): Int = suggestionsList.size

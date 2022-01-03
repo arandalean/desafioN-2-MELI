@@ -21,7 +21,7 @@ class SuggestionActivity : AppCompatActivity() {
     }
 
     private fun initiateRecyclerView() {
-        adapter = SuggestAdapter(suggestionList)
+        adapter = SuggestAdapter(suggestionList, this)
         binding.rvItems.adapter = adapter
     }
 }
