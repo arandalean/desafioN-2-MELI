@@ -77,12 +77,7 @@ class RandomActivity : AppCompatActivity() {
                         }
                     }
                     binding.TVSuggestDescriptionR.text = suggestion?.activity
-<<<<<<< HEAD
-                    // Llamar a funcion con Random Activity
-                    //showRandom(type, participants!!,price, description)
-=======
 
->>>>>>> 153c021 (Resolving details activity)
                 } else {
                     showError()
                 }
