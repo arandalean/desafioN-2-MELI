@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NotBoredApp">
         <activity
-            android:name=".RandomActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DetailsActivity"
@@ -24,7 +24,7 @@
             android:name=".TermsActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".RandomActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
