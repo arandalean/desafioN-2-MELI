@@ -28,14 +28,14 @@ class DetailsActivity : AppCompatActivity() {
         val participants = 2
 
         if (participants != 0){
-            searchDetailsWithPartipants(participants,type)
+            searchDetailsWithPartipants("?participants=$participants&type=$type")
             binding.BTNTryAnother.setOnClickListener(){
-                searchDetailsWithPartipants(participants,type)
+                searchDetailsWithPartipants("?participants=$participants&type=$type")
             }
         } else {
-            searchDetailsWithoutPartipants(type)
+            searchDetailsWithoutPartipants("?type=$type")
             binding.BTNTryAnother.setOnClickListener(){
-                searchDetailsWithoutPartipants(type)
+                searchDetailsWithoutPartipants("?type=$type")
             }
         }
 
@@ -52,9 +52,9 @@ class DetailsActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    private fun searchDetailsWithoutPartipants(type : String){
+    private fun searchDetailsWithoutPartipants(url: String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIService::class.java).getSuggestionByType(type)
+            val call = getRetrofit().create(APIService::class.java).getSuggestionByType(url)
             val suggestion : SuggestResponse? = call.body()
             runOnUiThread{
                 if (call.isSuccessful){
@@ -81,9 +81,9 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-    private fun searchDetailsWithPartipants(participants: Int, type : String){
+    private fun searchDetailsWithPartipants(url : String){
         CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIService::class.java).getSuggestionByTypeWithPart(participants,type)
+            val call = getRetrofit().create(APIService::class.java).getSuggestionByTypeWithPart(url)
             val suggestion : SuggestResponse? = call.body()
             runOnUiThread{
                 if (call.isSuccessful){
