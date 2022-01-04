@@ -24,6 +24,9 @@
         android:layout_marginTop="24dp"
         android:text=""
         android:gravity="center"
+        android:hint="@string/app_name"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/BTNBack"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,11 +34,16 @@
 
     <TextView
         android:id="@+id/TVSuggestDescription"
-        android:layout_width="197dp"
+        android:layout_width="0dp"
         android:layout_height="140dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text=""
+        android:layout_marginEnd="32dp"
         android:gravity="center"
+        android:hint="@string/app_name"
+        android:text=""
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,38 +74,42 @@
         android:layout_width="128dp"
         android:layout_height="32dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="88dp"
         android:text="@string/participants"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/IVParticipants"
         app:layout_constraintStart_toEndOf="@+id/IVParticipants"
-        app:layout_constraintTop_toBottomOf="@+id/TVSuggestDescription" />
+        app:layout_constraintTop_toTopOf="@+id/IVParticipants" />
 
     <TextView
         android:id="@+id/TVPrice"
         android:layout_width="128dp"
         android:layout_height="32dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="36dp"
         android:text="@string/price"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/IVPrice"
         app:layout_constraintStart_toEndOf="@+id/IVPrice"
-        app:layout_constraintTop_toBottomOf="@+id/TVParticipantLabel" />
+        app:layout_constraintTop_toTopOf="@+id/IVPrice" />
 
     <TextView
         android:id="@+id/TVParticipantResult"
         android:layout_width="109dp"
         android:layout_height="32dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="88dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/TVParticipantLabel"
         app:layout_constraintStart_toEndOf="@+id/TVParticipantLabel"
-        app:layout_constraintTop_toBottomOf="@+id/TVSuggestDescription" />
+        app:layout_constraintTop_toTopOf="@+id/TVParticipantLabel" />
 
     <TextView
         android:id="@+id/TVPriceResult"
         android:layout_width="109dp"
         android:layout_height="32dp"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="36dp"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/TVPrice"
         app:layout_constraintStart_toEndOf="@+id/TVPrice"
-        app:layout_constraintTop_toBottomOf="@+id/TVParticipantResult" />
+        app:layout_constraintTop_toTopOf="@+id/TVPrice" />
 
     <Button
         android:id="@+id/BTNTryAnother"
@@ -107,6 +119,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="64dp"
         android:text="@string/try_another"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

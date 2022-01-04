@@ -28,14 +28,14 @@ class DetailsActivity : AppCompatActivity() {
 
 
         if (participants != 0){
-            searchDetailsWithPartipants("?participants=$participants&type=$type")
+            searchDetailsWithParticipants("?participants=$participants&type=$type")
             binding.BTNTryAnother.setOnClickListener(){
-                searchDetailsWithPartipants("?participants=$participants&type=$type")
+                searchDetailsWithParticipants("?participants=$participants&type=$type")
             }
         } else {
-            searchDetailsWithoutPartipants("?type=$type")
+            searchDetailsWithoutParticipants("?type=$type")
             binding.BTNTryAnother.setOnClickListener(){
-                searchDetailsWithoutPartipants("?type=$type")
+                searchDetailsWithoutParticipants("?type=$type")
             }
         }
 
@@ -52,7 +52,7 @@ class DetailsActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create()).build()
     }
 
-    private fun searchDetailsWithoutPartipants(url: String){
+    private fun searchDetailsWithoutParticipants(url: String){
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(APIService::class.java).getSuggestionByType(url)
             val suggestion : SuggestResponse? = call.body()
@@ -61,18 +61,19 @@ class DetailsActivity : AppCompatActivity() {
                     binding.TVSuggestTitle.text = suggestion?.type
                     binding.TVParticipantResult.text = (suggestion?.participants ?: 0).toString()
                     val priceResult = suggestion?.price
-                    if (priceResult != null) {
+                    priceResult.let {
                         when {
-                            priceResult==0f -> binding.TVPriceResult.text = "Free"
-                            (priceResult>0f && priceResult <= 0.3f) ->binding.TVPriceResult.text = "Low"
-                            (priceResult>0.3f && priceResult <= 0.6f) ->binding.TVPriceResult.text = "Medium"
-                            priceResult>0.6f -> "High".also { binding.TVPriceResult.text = it }
-
+                            it==0f -> binding.TVPriceResult.text = "Free"
+                            (it!!>0f && it <= 0.3f) ->binding.TVPriceResult.text = "Low"
+                            (it>0.3f && it <= 0.6f) ->binding.TVPriceResult.text = "Medium"
+                            else -> binding.TVPriceResult.text = "High"
                         }
                     }
                     binding.TVSuggestDescription.text = suggestion?.activity
+
+                    suggestion?.error?.let { showError(it) }
                 } else {
-                    showError()
+                    showError(R.string.unsuccessfull.toString())
                 }
             }
 
@@ -81,7 +82,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
 
-    private fun searchDetailsWithPartipants(url : String){
+    private fun searchDetailsWithParticipants(url : String){
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit().create(APIService::class.java).getSuggestionByTypeWithPart(url)
             val suggestion : SuggestResponse? = call.body()
@@ -90,19 +91,20 @@ class DetailsActivity : AppCompatActivity() {
                     binding.TVSuggestTitle.text = suggestion?.type
                     binding.TVParticipantResult.text = (suggestion?.participants ?: 0).toString()
                     val priceResult = suggestion?.price
-                    if (priceResult != null) {
+                    priceResult.let {
                         when {
-                            priceResult==0f -> binding.TVPriceResult.text = "Free"
-                            (priceResult>0f && priceResult <= 0.3f) ->binding.TVPriceResult.text = "Low"
-                            (priceResult>0.3f && priceResult <= 0.6f) ->binding.TVPriceResult.text = "Medium"
-                            priceResult>0.6f -> "High".also { binding.TVPriceResult.text = it }
-
+                            it==0f -> binding.TVPriceResult.text = "Free"
+                            (it!!>0f && it <= 0.3f) ->binding.TVPriceResult.text = "Low"
+                            (it>0.3f && it <= 0.6f) ->binding.TVPriceResult.text = "Medium"
+                            else -> binding.TVPriceResult.text = "High"
                         }
                     }
                     binding.TVSuggestDescription.text = suggestion?.activity
 
-                } else {
-                    showError()
+                    suggestion?.error?.let { showError(it) }
+
+                }else {
+                    showError(R.string.unsuccessfull.toString())
                 }
             }
 
@@ -110,7 +112,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun showError() {
-        Toast.makeText(this, "An error has happened", Toast.LENGTH_SHORT).show()
+    private fun showError(error: String) {
+        Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
     }
 }

@@ -8,4 +8,5 @@ data class SuggestResponse(
     var link: String,
     var key: String,
     var accessibility: String,
+    var error: String
 )

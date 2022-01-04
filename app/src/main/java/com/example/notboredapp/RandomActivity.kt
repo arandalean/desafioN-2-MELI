@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.notboredapp.databinding.ActivityRandomBinding
-import com.example.notboredapp.databinding.ActivityRandomBinding.*
 import com.example.notboredapp.retrofit.APIService
 import com.example.notboredapp.retrofit.SuggestResponse
 import kotlinx.coroutines.CoroutineScope
@@ -20,7 +19,7 @@ class RandomActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = inflate(layoutInflater)
+        binding = ActivityRandomBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
@@ -60,28 +59,23 @@ class RandomActivity : AppCompatActivity() {
             val suggestion : SuggestResponse? = call.body()
             runOnUiThread{
                 if (call.isSuccessful){
-
                         binding.TVTypeR.text = suggestion?.type
                         binding.TVParticipantResultR.text =
                             (suggestion?.participants ?: 0).toString()
                         val priceResult = suggestion?.price
-                        if (priceResult != null) {
+                        priceResult.let {
                             when {
-                                priceResult == 0f -> binding.TVPriceResultR.text = "Free"
-                                (priceResult > 0f && priceResult <= 0.3f) -> binding.TVPriceResultR.text =
-                                    "Low"
-                                (priceResult > 0.3f && priceResult <= 0.6f) -> binding.TVPriceResultR.text =
-                                    "Medium"
-                                priceResult > 0.6f -> "High".also {
-                                    binding.TVPriceResultR.text = it
-                                }
-
+                                it==0f -> binding.TVPriceResultR.text = "Free"
+                                (it!!>0f && it <= 0.3f) ->binding.TVPriceResultR.text = "Low"
+                                (it>0.3f && it <= 0.6f) ->binding.TVPriceResultR.text = "Medium"
+                                else -> binding.TVPriceResultR.text = "High"
                             }
                         }
                         binding.TVSuggestDescriptionR.text = suggestion?.activity
 
-                } else {
-                    showError()
+                    suggestion?.error?.let { showError(it) }
+                }else {
+                    showError(R.string.unsuccessfull.toString())
                 }
             }
 
@@ -98,20 +92,21 @@ class RandomActivity : AppCompatActivity() {
                     binding.TVTypeR.text = suggestion?.type
                     binding.TVParticipantResultR.text = suggestion?.participants.toString()
                     val priceResult = suggestion?.price
-                    if (priceResult != null) {
+                    priceResult.let {
                         when {
-                            priceResult==0f -> binding.TVPriceResultR.text = "Free"
-                            (priceResult>0f && priceResult <= 0.3f) ->binding.TVPriceResultR.text = "Low"
-                            (priceResult>0.3f && priceResult <= 0.6f) ->binding.TVPriceResultR.text = "Medium"
-                            priceResult>0.6f -> "High".also { binding.TVPriceResultR.text = it }
-
+                            it==0f -> binding.TVPriceResultR.text = "Free"
+                            (it!!>0f && it <= 0.3f) ->binding.TVPriceResultR.text = "Low"
+                            (it>0.3f && it <= 0.6f) ->binding.TVPriceResultR.text = "Medium"
+                            else -> binding.TVPriceResultR.text = "High"
                         }
                     }
 
                     binding.TVSuggestDescriptionR.text = suggestion?.activity
 
-                } else {
-                    showError()
+                    suggestion?.error?.let { showError(it) }
+
+                }else {
+                    showError(R.string.unsuccessfull.toString())
                 }
             }
         }
@@ -119,7 +114,7 @@ class RandomActivity : AppCompatActivity() {
 
 
 
-    private fun showError() {
-        Toast.makeText(this, "An error has happened", Toast.LENGTH_SHORT).show()
+    private fun showError(error: String) {
+        Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
     }
 }

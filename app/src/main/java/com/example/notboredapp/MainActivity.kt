@@ -34,12 +34,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun start() {
         var participants = binding.etParticipants.text.toString()
-        if (participants.isNullOrBlank()) {
-            participants = "0"
+        if (participants == "0") {
+            Toast.makeText(this, "Number cannot be 0", Toast.LENGTH_SHORT).show()
+        } else {
+            if (participants.isNullOrBlank()) {
+                participants = "0"
+            }
+            val intent = Intent(this, SuggestionActivity::class.java)
+            intent.putExtra("participants", participants)
+            startActivity(intent)
         }
-        val intent = Intent(this, SuggestionActivity::class.java)
-        intent.putExtra("participants", participants)
-        startActivity(intent)
-        finish()
+
     }
 }
